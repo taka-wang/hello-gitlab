@@ -7,13 +7,14 @@ env:
 
 before_install:
   - sudo rm /usr/local/bin/docker-compose
-  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
-  - chmod +x docker-compose
+  - curl -L https://github.com/docker/compose/releases/download/1.22.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+  - chmod +x /usr/local/bin/docker-compose
   - sudo mv docker-compose /usr/local/bin
 
 script:
   - git clone https://$name:$pass@gitlab.com/jamie.wang/hello-travis.git hello-travis
   - cd hello-travis
+  - ls
   - docker-compose -f docker-compose.yml up -d
   - sleep 5
   - docker-compose -f docker-compose.yml logs
