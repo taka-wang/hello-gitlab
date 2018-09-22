@@ -13,7 +13,7 @@ before_install:
   - docker login -u $username -p $password registry.gitlab.com
 
 script:
-  - git clone https://$account:$token@https://gitlab.com/jamie.wang/recognition-server.git hello-travis
+  - git clone https://$account:$token@gitlab.com/jamie.wang/recognition-server.git hello-travis
   - cd hello-travis
   - ls
   - docker-compose -f cloud.yml -f edge.yml -f ci.yml up --build --abort-on-container-exit
