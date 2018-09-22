@@ -10,11 +10,12 @@ before_install:
   - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
+  - docker login -u $username -p $password registry.gitlab.com
 
 script:
-  - git clone https://$name:$pass@gitlab.com/jamie.wang/hello-travis.git hello-travis
+  - git clone https://$account:$token@https://gitlab.com/jamie.wang/recognition-server.git hello-travis
   - cd hello-travis
   - ls
-  - docker-compose -f docker-compose.yml up -d
-  - sleep 5
-  - docker-compose -f docker-compose.yml logs
+  - docker-compose -f cloud.yml -f edge.yml -f ci.yml up --build --abort-on-container-exit
+  - docker-compose -f cloud.yml -f edge.yml -f ci.yml logs
+
