@@ -12,4 +12,9 @@ before_install:
   - sudo mv docker-compose /usr/local/bin
 
 script:
-  - git clone https://gitlab.com/jamie.wang/nanomsg-example.git nanomsg
+  #- git clone https://gitlab.com/jamie.wang/nanomsg-example.git nanomsg
+  - git clone https://$username:$password@https://gitlab.com/jamie.wang/hello-travis.git hello-travis
+  - cd hello-travis
+  - docker-compose -f docker-compose.yml up -d
+  - sleep 5
+  - docker-compose -f docker-compose.yml logs
